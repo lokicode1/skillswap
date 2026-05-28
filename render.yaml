@@ -5,6 +5,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     autoDeploy: true
+    healthCheckPath: /api/health
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
