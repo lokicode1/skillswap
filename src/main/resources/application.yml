@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/skillswap}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:skillswap}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${SKILLSWAP_DB_HOST:localhost}:${SKILLSWAP_DB_PORT:5433}/${SKILLSWAP_DB_NAME:skillswap}}
+    username: ${SPRING_DATASOURCE_USERNAME:${SKILLSWAP_DB_USER:postgres}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${SKILLSWAP_DB_PASSWORD:skillswap}}
   jpa:
     hibernate:
       ddl-auto: update

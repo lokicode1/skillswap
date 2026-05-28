@@ -7,15 +7,23 @@ services:
     autoDeploy: true
     healthCheckPath: /api/health
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      - key: SKILLSWAP_DB_HOST
         fromDatabase:
           name: skillswap-db
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
+          property: host
+      - key: SKILLSWAP_DB_PORT
+        fromDatabase:
+          name: skillswap-db
+          property: port
+      - key: SKILLSWAP_DB_NAME
+        fromDatabase:
+          name: skillswap-db
+          property: database
+      - key: SKILLSWAP_DB_USER
         fromDatabase:
           name: skillswap-db
           property: user
-      - key: SPRING_DATASOURCE_PASSWORD
+      - key: SKILLSWAP_DB_PASSWORD
         fromDatabase:
           name: skillswap-db
           property: password
