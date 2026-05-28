@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: skillswap-app
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: skillswap-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: skillswap-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: skillswap-db
+          property: password
+      - key: SKILLSWAP_JWT_SECRET
+        generateValue: true
+      - key: SKILLSWAP_JWT_ISSUER
+        value: skillswap-render
+      - key: SKILLSWAP_JWT_ACCESS_MINUTES
+        value: "120"
+
+databases:
+  - name: skillswap-db
+    databaseName: skillswap
+    user: skillswap
+    plan: free
+

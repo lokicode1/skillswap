@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/skillswap}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:skillswap}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+skillswap:
+  jwt:
+    issuer: ${SKILLSWAP_JWT_ISSUER:skillswap}
+    secret: ${SKILLSWAP_JWT_SECRET:dev-change-me-dev-change-me-dev-change-me}
+    accessTokenMinutes: ${SKILLSWAP_JWT_ACCESS_MINUTES:60}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
