@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.time.Instant;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/bookings")
-@RequiredArgsConstructor
 public class BookingController {
 
   private final BookingCalendarRepository bookings;
   private final BookingService bookingService;
   private final CurrentUserService currentUserService;
+
+  public BookingController(
+      BookingCalendarRepository bookings,
+      BookingService bookingService,
+      CurrentUserService currentUserService
+  ) {
+    this.bookings = bookings;
+    this.bookingService = bookingService;
+    this.currentUserService = currentUserService;
+  }
 
   @GetMapping
   public List<BookingResponse> myBookings() {

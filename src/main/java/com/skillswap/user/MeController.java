@@ -1,18 +1,21 @@
 package com.skillswap.user;
 
 import com.skillswap.common.CurrentUserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/me")
-@RequiredArgsConstructor
 public class MeController {
 
   private final UserRepository users;
   private final CurrentUserService currentUserService;
+
+  public MeController(UserRepository users, CurrentUserService currentUserService) {
+    this.users = users;
+    this.currentUserService = currentUserService;
+  }
 
   @GetMapping
   public MeResponse me() {

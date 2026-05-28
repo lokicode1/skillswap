@@ -7,18 +7,28 @@ import com.skillswap.user.UserRepository;
 import com.skillswap.wallet.TimeTransaction;
 import com.skillswap.wallet.TimeTransactionRepository;
 import java.time.Instant;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class BookingService {
 
   private final BookingCalendarRepository bookings;
   private final SkillOfferRepository offers;
   private final UserRepository users;
   private final TimeTransactionRepository transactions;
+
+  public BookingService(
+      BookingCalendarRepository bookings,
+      SkillOfferRepository offers,
+      UserRepository users,
+      TimeTransactionRepository transactions
+  ) {
+    this.bookings = bookings;
+    this.offers = offers;
+    this.users = users;
+    this.transactions = transactions;
+  }
 
   @Transactional
   public BookingCalendar createBooking(Long requesterId, Long offerId, Instant startAt, Instant endAt, long tokenMinutes) {

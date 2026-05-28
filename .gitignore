@@ -14,6 +14,9 @@ frontend/dist/
 # IDE / OS
 .idea/
 .vscode/
+.settings/
+.project
+.classpath
 *.iml
 Thumbs.db
 .DS_Store

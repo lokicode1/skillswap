@@ -3,7 +3,6 @@ package com.skillswap.auth;
 import com.skillswap.user.User;
 import com.skillswap.user.UserRepository;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
   private final UserRepository users;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
+
+  public AuthController(UserRepository users, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    this.users = users;
+    this.passwordEncoder = passwordEncoder;
+    this.jwtService = jwtService;
+  }
 
   @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)

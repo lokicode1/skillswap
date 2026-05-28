@@ -3,18 +3,21 @@ package com.skillswap.wallet;
 import com.skillswap.common.CurrentUserService;
 import java.time.Instant;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/wallet")
-@RequiredArgsConstructor
 public class WalletController {
 
   private final TimeTransactionRepository transactions;
   private final CurrentUserService currentUserService;
+
+  public WalletController(TimeTransactionRepository transactions, CurrentUserService currentUserService) {
+    this.transactions = transactions;
+    this.currentUserService = currentUserService;
+  }
 
   @GetMapping("/transactions")
   public List<TransactionResponse> myTransactions() {

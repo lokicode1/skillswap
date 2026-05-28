@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 public class SkillsController {
 
   private final SkillOfferRepository offers;
   private final SkillNeedRepository needs;
   private final UserRepository users;
   private final CurrentUserService currentUserService;
+
+  public SkillsController(
+      SkillOfferRepository offers,
+      SkillNeedRepository needs,
+      UserRepository users,
+      CurrentUserService currentUserService
+  ) {
+    this.offers = offers;
+    this.needs = needs;
+    this.users = users;
+    this.currentUserService = currentUserService;
+  }
 
   @GetMapping("/offers")
   public List<OfferResponse> offers(@RequestParam(defaultValue = "") String q) {
